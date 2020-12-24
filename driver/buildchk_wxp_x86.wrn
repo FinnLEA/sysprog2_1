@@ -1,0 +1,8 @@
+1>warnings in directory d:\Ó÷åáà\sysprog2\task\task1\task\driver
+1>d:\ãç¥¡ \sysprog2\task\task1\task\driver\gdt_idt_work.c(100) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\ãç¥¡ \sysprog2\task\task1\task\driver\gdt_idt_work.c(121) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\ãç¥¡ \sysprog2\task\task1\task\driver\gdt_idt_work.c(146) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\ãç¥¡ \sysprog2\task\task1\task\driver\gdt_idt_work.c(153) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\ãç¥¡ \sysprog2\task\task1\task\driver\gdt_idt_work.c(170) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\ãç¥¡ \sysprog2\task\task1\task\driver\gdt_idt_work.c(205) : warning C4996: 'ExAllocatePool': was declared deprecated
+1>d:\ãç¥¡ \sysprog2\task\task1\task\driver\gdt_idt_work.c(246) : warning C4995: 'strcat': name was marked as #pragma deprecated
