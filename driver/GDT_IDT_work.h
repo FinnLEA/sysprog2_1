@@ -30,6 +30,11 @@ VOID DumpGDT (
 	OUT PULONG length
 	);
 
+VOID DumpIDT (
+	OUT PVOID Buf, 
+	OUT PULONG length
+	);
+
 
 
 

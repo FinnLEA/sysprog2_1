@@ -62,7 +62,8 @@ BUILD: Examining d:\oacr invalidate root:x86chk /autocleanqueue
 1>init.c
 1>gdt_idt_work.c
 1>d:\1>warnings in directory d:\1>d:\1>d:\1>d:\1>d:\1>d:\1>d:\1>d:\1>d:\1>d:\1>d:\1> c:\winddk\7600.16385.1\inc\ddk\wdm.h(16147) : see declaration of 'ExAllocatePool'
-1>d:\1>d:\1>Generating Code...
+1>d:\1>d:\1>d:\1>d:\1> c:\winddk\7600.16385.1\inc\ddk\wdm.h(16147) : see declaration of 'ExAllocatePool'
+1>Generating Code...
 1> C:\WinDDK\7600.16385.1\Bin\x86\oacr\oacrlink /out:d:\1>Microsoft (R) Incremental Linker Version 9.00.30729.207
 1>Copyright (C) Microsoft Corporation.  All rights reserved.
 1>/MERGE:_PAGE=PAGE 

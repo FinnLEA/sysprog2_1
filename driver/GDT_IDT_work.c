@@ -255,4 +255,36 @@ VOID DumpGDT (
 
 //--------------------
 
+
+VOID DumpIDT (
+	OUT PVOID Buf, 
+	OUT PULONG length
+) {
+	
+	IDTR idtr;
+	ULONG i;
+	ULONG segCount;
+	PDescriptor idt;
+	PCHAR tmpBuf;
+	ULONG needLen = *length;
+	
+	*length = 0;
+
+	tmpBuf = ExAllocatePool(NonPagedPool, 256);
+	if(!tmpBuf){
+		DbgPrint("Error allocate pool");
+		return;
+	}
+	RtlZeroMemory(tmpBuf, 256);
+    __asm {sidt idtr}
+
+    segCount = (idtr.Limit + 1) / sizeof(Descriptor);
+    idt = (Descriptor *) idtr.Base;
+
+    DbgPrint ("IDT (%08X) contains %d segments\n", idtr.Base, segCount);
+
+
+	return;
+}
+
 //-----------------------------------------------
