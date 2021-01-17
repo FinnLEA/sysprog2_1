@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include "codes.h"
+#include "system.h"
 #include <regex>
 
 using namespace std;
@@ -45,7 +46,7 @@ extern CHAR glDriverName[128];
 //-----------------------------------------------
 
 VOID StartListenCommand(VOID);
-BOOL GetDump(DWORD code, string& outStr);
+BOOL GetDump(DWORD code, string& outStr, PULONG len);
 
 //-----------------------------------------------
 

@@ -81,6 +81,16 @@ NTSTATUS DispatchControl(PDEVICE_OBJECT DeviceObject, PIRP pIrp){
 			break;
 
 		case DUMP_IDT_IOCTL:
+			len = outLen;
+			DumpIDT(out, &len);
+
+			len = outLen > len ? len : outLen;
+			//RtlCopyMemory(out, buf, len);
+			
+			//ExFreePool(buf);
+
+			info = len;
+
 			break;
 		
 		default:
@@ -219,15 +229,15 @@ VOID DumpGDT (
 		ULONG tmpLen = 0;
         if (!gdt[i].SecurityByteDetail.P) {
             continue;
-            }
+        }
 
         if (gdt[i].SecurityByteDetail.SystemOrUser) {
             if (gdt[i].Data.CodeOrData) {
                 ShowCodeSeg (&gdt[i].Code, i, tmpBuf);
-            }
+			}
             else {
                 ShowDataSeg (&gdt[i].Data, i, tmpBuf);
-            }
+			}
         }
         else {
             ShowSystemSeg (&gdt[i].System, i, tmpBuf);
@@ -235,7 +245,7 @@ VOID DumpGDT (
 
 		tmpLen = strlen(tmpBuf);
 		if(tmpLen + *length > needLen){
-			tmpLen = needLen - 	*length;
+			tmpLen = needLen - 	*length - 1;
 			strncat(Buf, tmpBuf, tmpLen);
 			RtlZeroMemory(tmpBuf, 256);
 			*length = needLen;
@@ -283,7 +293,37 @@ VOID DumpIDT (
 
     DbgPrint ("IDT (%08X) contains %d segments\n", idtr.Base, segCount);
 
+	for (i = 0; i < segCount; ++i) {
+		ULONG tmpLen = 0;
+        if (!idt[i].SecurityByteDetail.P) {
+            continue;
+        }
+		
+		if (idt[i].SecurityByteDetail.SystemOrUser) {
+			StringCchPrintfA(tmpBuf, STRSAFE_MAX_CCH, "SecurityByteDetail.SystemOrUser == 1\n");
+		}
+		else {
+			ShowSystemSeg (&idt[i].System, i, tmpBuf);
+		}
+		
+		tmpLen = strlen(tmpBuf);
+		if(tmpLen + *length > needLen){
+			tmpLen = needLen - 	*length - 1;
+			strncat(Buf, tmpBuf, tmpLen);
+			RtlZeroMemory(tmpBuf, 256);
+			*length = needLen;
+			break;
+		} 
+		else{
+			*length += tmpLen;
+			strcat(Buf, tmpBuf);
+			RtlZeroMemory(tmpBuf, 256);
+		}
 
+	}
+
+	ExFreePool(tmpBuf);
+	
 	return;
 }
 

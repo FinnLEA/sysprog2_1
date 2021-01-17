@@ -34,7 +34,8 @@ VOID StartListenCommand(VOID){
 		if(FIND_COMMAND(command, ".dump")){
 			if(FIND_COMMAND_ARG(command, "-g")){
 				string outStr;
-				if(!GetDump(DUMP_GDT_IOCTL, outStr)){
+				ULONG outLen = 0x1000;
+				if(!GetDump(DUMP_GDT_IOCTL, outStr, &outLen)){
 					cout << "Error get dump GDT\n";
 				}
 				else{
@@ -45,7 +46,8 @@ VOID StartListenCommand(VOID){
 			}
 			else if (FIND_COMMAND_ARG(command, "-i")){
 				string outStr;
-				if(!GetDump(DUMP_IDT_IOCTL, outStr)){
+				ULONG outLen = 0x1C00;
+				if(!GetDump(DUMP_IDT_IOCTL, outStr, &outLen)){
 					cout << "Error get dump IDT\n";
 				}
 				else{
@@ -136,9 +138,9 @@ VOID StartListenCommand(VOID){
 }
 
 
-BOOL GetDump(DWORD code, string& outStr){
-	PCH Buf = (PCH)malloc(1024);
-	ULONG len = 1024;
+BOOL GetDump(DWORD code, string& outStr, PULONG len){
+	PCH Buf = (PCH)malloc(*len);
+	//ULONG len = 1024;
 	HANDLE hFile;
 	
 	
@@ -160,15 +162,15 @@ BOOL GetDump(DWORD code, string& outStr){
                         NULL,
                         0,
                         Buf,
+                        *len,
                         len,
-                        &len,
 						NULL) ) {
 
         printf("Error read\n");
 		return FALSE;
 	}
 
-    Buf[len] = 0;
+    Buf[*len] = 0;
     outStr = Buf;
 
 	CloseHandle(hFile);

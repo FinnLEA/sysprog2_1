@@ -1,9 +1,10 @@
 1>warnings in directory d:\╙ўхср\sysprog2\task\task1\sysprog2_1\driver
-1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(107) : warning C4090: 'function' : different 'const' qualifiers
-1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(128) : warning C4090: 'function' : different 'const' qualifiers
-1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(153) : warning C4090: 'function' : different 'const' qualifiers
-1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(160) : warning C4090: 'function' : different 'const' qualifiers
-1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(177) : warning C4090: 'function' : different 'const' qualifiers
-1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(212) : warning C4996: 'ExAllocatePool': was declared deprecated
-1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(253) : warning C4995: 'strcat': name was marked as #pragma deprecated
-1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(280) : warning C4996: 'ExAllocatePool': was declared deprecated
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(110) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(131) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(156) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(163) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(180) : warning C4090: 'function' : different 'const' qualifiers
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(215) : warning C4996: 'ExAllocatePool': was declared deprecated
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(256) : warning C4995: 'strcat': name was marked as #pragma deprecated
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(283) : warning C4996: 'ExAllocatePool': was declared deprecated
+1>d:\учеба\sysprog2\task\task1\sysprog2_1\driver\gdt_idt_work.c(319) : warning C4995: 'strcat': name was marked as #pragma deprecated
