@@ -36,7 +36,7 @@
 *.x86_64
 *.hex
 *.sys
-*.bat
+
 
 # Debug files
 *.dSYM/
@@ -56,3 +56,5 @@ dkms.conf
 *.user
 *.suo
 *.log
+*.wrm
+*.vs*
