@@ -36,6 +36,7 @@
 *.x86_64
 *.hex
 *.sys
+*.bat
 
 # Debug files
 *.dSYM/
@@ -52,3 +53,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 *.ncb
+*.user
+*.suo
+*.log
