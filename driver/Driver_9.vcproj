@@ -252,6 +252,10 @@
 			Filter=".c;.cpp"
 			>
 			<File
+				RelativePath=".\dispatch_work.c"
+				>
+			</File>
+			<File
 				RelativePath=".\GDT_IDT_work.c"
 				>
 			</File>
@@ -285,6 +289,10 @@
 			Filter=".h"
 			>
 			<File
+				RelativePath=".\dispatch_work.h"
+				>
+			</File>
+			<File
 				RelativePath=".\GDT_IDT_work.h"
 				>
 			</File>
@@ -294,6 +302,10 @@
 			</File>
 			<File
 				RelativePath=".\intel.h"
+				>
+			</File>
+			<File
+				RelativePath=".\work_includes.h"
 				>
 			</File>
 		</Filter>
