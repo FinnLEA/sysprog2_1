@@ -3,6 +3,46 @@
 
 //----------------------------------------
 
+PGATE pGatesArray;
+PULONG glpOriginGateHandlers;
+volatile ULONG gltmpOriginHandler;
+ULONG glCR0reg;
+
+//----------------------------------------
+
+//----------------------------------------
+
+ULONG ClearWP (void) {
+
+ULONG reg;
+
+    __asm {
+        mov eax, cr0
+        mov [reg], eax
+        and eax, 0xFFFEFFFF
+        mov cr0, eax
+    }
+
+    return reg;
+}
+
+
+//--------------------
+
+
+
+void WriteCR0 (ULONG reg) {
+
+    __asm {
+        mov eax, [reg]
+        mov cr0, eax
+    }
+
+}
+
+
+//--------------------
+
 VOID ShowCodeSeg (DescriptorCode *des, ULONG index, PVOID buf) {
 
 ULONG base = des->BaseLow + (des->BaseMedium << 16) + (des->BaseHigh << 24);
@@ -224,5 +264,106 @@ VOID DumpIDT (
 	
 	return;
 }
+
+NTSTATUS AllocateAndInitGlArrays(
+	PDescriptor idt,
+	ULONG gateCount
+) {
+	
+	NTSTATUS status = STATUS_SUCCESS;
+	ULONG i;
+	PDescriptorSystem des;
+	PDescriptorGate gate;
+	
+	pGatesArray = (PGATE)ExAllocatePool(NonPagedPool, sizeof(GATE) * gateCount);
+	if(pGatesArray == NULL) {
+		DbgPrint("Error allocate in AllocateAndInitGlArrays\n");
+		return STATUS_UNSUCCESSFUL;
+	}
+	RtlZeroMemory(pGatesArray, sizeof(GATE) * gateCount);
+
+	for(i = 0; i < gateCount; ++i) {
+		ULONG handleAddr;
+		if (!idt[i].SecurityByteDetail.P) {
+            continue;
+        }
+		
+		des = (PDescriptorSystem)(&idt[i].System);
+		if(des->Type == TYPE_TASKGATE) {
+			continue;
+		}
+		
+		gate = (PDescriptorGate)des;
+		pGatesArray[i].origHandler = gate->DestinationOffsetLow + (gate->DestinationOffsetHigh << 16);
+		DbgPrint("%3d: 0x%08X", i, pGatesArray[i].origHandler);
+	}
+
+}
+
+VOID FreeGlArrays() {
+	ExFreePool(pGatesArray);
+}
+
+VOID HookAllIDTGates() {
+	IDTR idtr;
+	ULONG i;
+	ULONG segCount;
+	PDescriptor idt;
+	
+	__asm {sidt idtr}
+	segCount = (idtr.Limit + 1) / sizeof(Descriptor);
+    idt = (Descriptor *) idtr.Base;
+
+	if(!NT_SUCCESS(AllocateAndInitGlArrays(idt, segCount))) {
+		return;
+	}
+	
+}
+
+
+/*
+ * 
+ * return адрес оригинального обработчика
+*/
+ULONG HookIDTGate(
+	PDescriptorGate hookedGate,
+	ULONG index,
+	ULONG HookAddr
+) {
+	
+	return 0;
+}
+
+__declspec(naked)
+static VOID CallStub(){}
+
+__declspec(naked)
+VOID HookRoutine(){
+	__asm {
+		pushad
+		pushfd
+		
+		push 0x11111111
+		call IncrementCount
+
+		popfd
+		popad
+		
+		jmp CallStub
+	}
+}
+
+
+
+VOID IncrementCount(
+	ULONG index
+) {
+	
+	InterlockedExchangeAdd(&(pGatesArray[index].count), 1); 
+	return;
+}
+
+
+
 
 //-----------------------------------------------

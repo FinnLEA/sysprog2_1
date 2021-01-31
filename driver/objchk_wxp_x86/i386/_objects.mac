@@ -3,6 +3,7 @@
 386_OBJECTS=\
  $(OBJ_PATH)\$O\init.obj \
  $(OBJ_PATH)\$O\gdt_idt_work.obj \
+ $(OBJ_PATH)\$O\dispatch_work.obj \
 
 
 
